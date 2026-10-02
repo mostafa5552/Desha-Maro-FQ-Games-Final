@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DESHA & MARO GAMES - Auth System</title>
+    <!-- مكتبة Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- ملف CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- ================= 1. شاشة تسجيل الدخول وإنشاء الحساب ================= -->
+        <section id="auth-screen" class="screen active">
+            <div class="brand-header">
+                <h1 class="glitch-title">DESHA & MARO</h1>
+                <p class="tagline">FOOTBALL ENGINE</p>
+            </div>
+
+            <div class="card auth-card">
+                <!-- أزرار التنقل بين الدخول والتسجيل -->
+                <div class="auth-tabs">
+                    <button id="tab-login" class="tab-btn active" onclick="switchTab('login')">تسجيل الدخول</button>
+                    <button id="tab-signup" class="tab-btn" onclick="switchTab('signup')">حساب جديد</button>
+                </div>
+
+                <!-- رسائل الخطأ أو النجاح -->
+                <div id="auth-message" class="message-box"></div>
+
+                <!-- نموذج الدخول والتسجيل -->
+                <form id="auth-form" onsubmit="handleAuthSubmit(event)">
+                    <!-- اسم المستخدم (يظهر فقط عند إنشاء حساب جديد) -->
+                    <div class="input-group" id="username-group" style="display: none;">
+                        <label for="auth-username"><i class="fa-solid fa-user"></i> اسم المستخدم (Username الفريد):</label>
+                        <input type="text" id="auth-username" placeholder="مثال: desha_king" autocomplete="off">
+                        <small class="hint">سيُستخدم هذا الاسم حصرياً للبحث عنك في المواجهات الأونلاين</small>
+                    </div>
+
+                    <!-- البريد الإلكتروني -->
+                    <div class="input-group">
+                        <label for="auth-email"><i class="fa-solid fa-envelope"></i> البريد الإلكتروني:</label>
+                        <input type="email" id="auth-email" required placeholder="name@example.com">
+                    </div>
+
+                    <!-- كلمة السر -->
+                    <div class="input-group">
+                        <label for="auth-password"><i class="fa-solid fa-lock"></i> كلمة السر:</label>
+                        <input type="password" id="auth-password" required placeholder="••••••••">
+                    </div>
+
+                    <!-- زر الإرسال الرئيسي -->
+                    <button type="submit" id="auth-submit-btn" class="btn btn-red">
+                        <i class="fa-solid fa-right-to-bracket"></i> دخول
+                    </button>
+                </form>
+
+                <div class="divider"><span>أو</span></div>
+
+                <!-- التسجيل عبر Google -->
+                <button type="button" class="btn btn-google" onclick="loginWithGoogle()">
+                    <i class="fa-brands fa-google"></i> المتابعة باستخدام Google
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= 2. الشاشة الرئيسية بعد تسجيل الدخول ================= -->
+        <section id="main-screen" class="screen">
+            <div class="card dashboard-card">
+                <div class="user-header">
+                    <i class="fa-solid fa-circle-user avatar"></i>
+                    <h2 id="user-display-username">مرحباً بك!</h2>
+                    <p id="user-display-email" class="email-label">---</p>
+                </div>
+
+                <div class="status-box">
+                    <p><i class="fa-solid fa-check-circle"></i> تم تسجيل الدخول وربط Supabase بنجاح!</p>
+                </div>
+
+                <button class="btn btn-red-outline" onclick="logout()">
+                    <i class="fa-solid fa-power-off"></i> تسجيل الخروج
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- ملف JS -->
+    <script src="script.js"></script>
+</body>
+</html>
