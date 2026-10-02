@@ -14,7 +14,7 @@
 <body>
 
     <div class="app-container">
-        <!-- ================= 1. شاشة تسجيل الدخول وإنشاء الحساب ================= -->
+        <!-- ================= 1. شاشة إنشاء الحساب وتسجيل الدخول ================= -->
         <section id="auth-screen" class="screen active">
             <div class="brand-header">
                 <h1 class="glitch-title">DESHA & MARO</h1>
@@ -22,48 +22,41 @@
             </div>
 
             <div class="card auth-card">
-                <!-- أزرار التنقل بين الدخول والتسجيل -->
-                <div class="auth-tabs">
-                    <button id="tab-login" class="tab-btn active" onclick="switchTab('login')">تسجيل الدخول</button>
-                    <button id="tab-signup" class="tab-btn" onclick="switchTab('signup')">حساب جديد</button>
-                </div>
+                <h2 class="card-title" id="auth-title"><i class="fa-solid fa-user-plus"></i> إنشاء حساب جديد</h2>
 
-                <!-- رسائل الخطأ أو النجاح -->
+                <!-- صندوق عرض الرسائل (خطأ / نجاح) -->
                 <div id="auth-message" class="message-box"></div>
 
-                <!-- نموذج الدخول والتسجيل -->
-                <form id="auth-form" onsubmit="handleAuthSubmit(event)">
-                    <!-- اسم المستخدم (يظهر فقط عند إنشاء حساب جديد) -->
-                    <div class="input-group" id="username-group" style="display: none;">
-                        <label for="auth-username"><i class="fa-solid fa-user"></i> اسم المستخدم (Username الفريد):</label>
-                        <input type="text" id="auth-username" placeholder="مثال: desha_king" autocomplete="off">
-                        <small class="hint">سيُستخدم هذا الاسم حصرياً للبحث عنك في المواجهات الأونلاين</small>
+                <!-- نموذج التسجيل المباشر -->
+                <form id="signup-form" onsubmit="handleSignup(event)">
+                    <!-- 1. اسم المستخدم الفريد -->
+                    <div class="input-group">
+                        <label for="auth-username"><i class="fa-solid fa-user"></i> اسم المستخدم (Username):</label>
+                        <input type="text" id="auth-username" required placeholder="مثال: desha_king" autocomplete="off">
+                        <small class="hint">سيُستخدم للبحث عنك في المواجهات الأونلاين</small>
                     </div>
 
-                    <!-- البريد الإلكتروني -->
+                    <!-- 2. البريد الإلكتروني -->
                     <div class="input-group">
                         <label for="auth-email"><i class="fa-solid fa-envelope"></i> البريد الإلكتروني:</label>
                         <input type="email" id="auth-email" required placeholder="name@example.com">
                     </div>
 
-                    <!-- كلمة السر -->
+                    <!-- 3. كلمة السر -->
                     <div class="input-group">
                         <label for="auth-password"><i class="fa-solid fa-lock"></i> كلمة السر:</label>
                         <input type="password" id="auth-password" required placeholder="••••••••">
                     </div>
 
-                    <!-- زر الإرسال الرئيسي -->
+                    <!-- زر إنشاء الحساب -->
                     <button type="submit" id="auth-submit-btn" class="btn btn-red">
-                        <i class="fa-solid fa-right-to-bracket"></i> دخول
+                        <i class="fa-solid fa-check-circle"></i> إنشاء الحساب وتأكيد
                     </button>
                 </form>
 
-                <div class="divider"><span>أو</span></div>
-
-                <!-- التسجيل عبر Google -->
-                <button type="button" class="btn btn-google" onclick="loginWithGoogle()">
-                    <i class="fa-brands fa-google"></i> المتابعة باستخدام Google
-                </button>
+                <div class="footer-link" id="footer-link">
+                    <p>لديك حساب بالفعل؟ <a href="#" onclick="toggleMode('login')">تسجيل الدخول</a></p>
+                </div>
             </div>
         </section>
 
@@ -77,7 +70,7 @@
                 </div>
 
                 <div class="status-box">
-                    <p><i class="fa-solid fa-check-circle"></i> تم تسجيل الدخول وربط Supabase بنجاح!</p>
+                    <p><i class="fa-solid fa-check-circle"></i> تم تسجيل الحساب بنجاح!</p>
                 </div>
 
                 <button class="btn btn-red-outline" onclick="logout()">
@@ -88,6 +81,6 @@
     </div>
 
     <!-- ملف JS -->
-    <script src="script.js"></script>
+    <script src="gameEngine.js"></script>
 </body>
 </html>

@@ -39,7 +39,7 @@ body {
     display: block;
 }
 
-/* Header */
+/* Brand Header */
 .brand-header {
     text-align: center;
     margin-bottom: 25px;
@@ -67,28 +67,11 @@ body {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
-/* Auth Tabs */
-.auth-tabs {
-    display: flex;
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--border-color);
-}
-
-.tab-btn {
-    flex: 1;
-    background: none;
-    border: none;
-    color: var(--text-gray);
-    padding: 10px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.tab-btn.active {
+.card-title {
+    font-size: 1.2rem;
     color: var(--primary-red);
-    border-bottom: 3px solid var(--primary-red);
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 /* Messages */
@@ -175,36 +158,25 @@ body {
     border: 1px solid var(--primary-red);
     color: var(--primary-red);
 }
-
-.btn-google {
-    background-color: #ffffff;
-    color: #333;
-}
-.btn-google:hover {
-    background-color: #e6e6e6;
+.btn-red-outline:hover {
+    background-color: rgba(230, 57, 70, 0.1);
 }
 
-.divider {
+.footer-link {
     text-align: center;
-    margin: 18px 0;
-    position: relative;
-}
-
-.divider::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0; right: 0;
-    height: 1px;
-    background-color: var(--border-color);
-}
-
-.divider span {
-    background-color: var(--card-bg);
-    padding: 0 10px;
-    position: relative;
+    margin-top: 15px;
+    font-size: 0.85rem;
     color: var(--text-gray);
-    font-size: 0.8rem;
+}
+
+.footer-link a {
+    color: var(--primary-red);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-link a:hover {
+    text-decoration: underline;
 }
 
 /* Dashboard Mockup */
