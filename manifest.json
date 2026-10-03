@@ -1,0 +1,29 @@
+{
+  "name": "DESHA & MARO GAMES",
+  "short_name": "D&M Games",
+  "description": "لعبة أسئلة كروية ومزاد لاعبين - صنع المطور مصطفي",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000000",
+  "theme_color": "#cc0000",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    {
+      "src": "https://i.supaimg.com/9b836138-e901-4e3b-a57b-85af24b46cef/c19e453c-1c31-41e9-90d7-6e56189f017b.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://i.supaimg.com/9b836138-e901-4e3b-a57b-85af24b46cef/c19e453c-1c31-41e9-90d7-6e56189f017b.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+
