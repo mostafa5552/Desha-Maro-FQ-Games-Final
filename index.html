@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DESHA & MARO GAMES - Auth System</title>
-    <!-- مكتبة Supabase JS -->
+    <!-- استدعاء أحدث إصدار من مكتبة Supabase JS v2 -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- أيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- ملف CSS -->
+    <!-- ملف الاستايل -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="app-container">
-        <!-- ================= 1. شاشة إنشاء الحساب وتسجيل الدخول ================= -->
+        <!-- ================= 1. شاشة تسجيل الدخول وإنشاء الحساب ================= -->
         <section id="auth-screen" class="screen active">
             <div class="brand-header">
                 <h1 class="glitch-title">DESHA & MARO</h1>
@@ -24,13 +24,13 @@
             <div class="card auth-card">
                 <h2 class="card-title" id="auth-title"><i class="fa-solid fa-user-plus"></i> إنشاء حساب جديد</h2>
 
-                <!-- صندوق عرض الرسائل (خطأ / نجاح) -->
+                <!-- صندوق إظهار الأخطاء والرسائل -->
                 <div id="auth-message" class="message-box"></div>
 
-                <!-- نموذج التسجيل المباشر -->
-                <form id="signup-form" onsubmit="handleSignup(event)">
-                    <!-- 1. اسم المستخدم الفريد -->
-                    <div class="input-group">
+                <!-- نموذج الإدخال -->
+                <form id="auth-form" onsubmit="handleAuthSubmit(event)">
+                    <!-- 1. اسم المستخدم -->
+                    <div class="input-group" id="username-group">
                         <label for="auth-username"><i class="fa-solid fa-user"></i> اسم المستخدم (Username):</label>
                         <input type="text" id="auth-username" required placeholder="مثال: desha_king" autocomplete="off">
                         <small class="hint">سيُستخدم للبحث عنك في المواجهات الأونلاين</small>
@@ -48,14 +48,14 @@
                         <input type="password" id="auth-password" required placeholder="••••••••">
                     </div>
 
-                    <!-- زر إنشاء الحساب -->
+                    <!-- زر الإرسال -->
                     <button type="submit" id="auth-submit-btn" class="btn btn-red">
                         <i class="fa-solid fa-check-circle"></i> إنشاء الحساب وتأكيد
                     </button>
                 </form>
 
                 <div class="footer-link" id="footer-link">
-                    <p>لديك حساب بالفعل؟ <a href="#" onclick="toggleMode('login')">تسجيل الدخول</a></p>
+                    <p>لديك حساب بالفعل؟ <a href="javascript:void(0)" onclick="toggleMode('login')">تسجيل الدخول</a></p>
                 </div>
             </div>
         </section>
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="status-box">
-                    <p><i class="fa-solid fa-check-circle"></i> تم تسجيل الحساب بنجاح!</p>
+                    <p><i class="fa-solid fa-check-circle"></i> تم تسجيل الدخول بنجاح!</p>
                 </div>
 
                 <button class="btn btn-red-outline" onclick="logout()">
@@ -80,7 +80,7 @@
         </section>
     </div>
 
-    <!-- ملف JS -->
+    <!-- ملف المحرك جافاسكريبت -->
     <script src="gameEngine.js"></script>
 </body>
 </html>

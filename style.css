@@ -39,7 +39,7 @@ body {
     display: block;
 }
 
-/* Brand Header */
+/* العنوان الرئيسي */
 .brand-header {
     text-align: center;
     margin-bottom: 25px;
@@ -58,7 +58,7 @@ body {
     letter-spacing: 4px;
 }
 
-/* Card Container */
+/* كارت الواجهة */
 .card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -74,7 +74,7 @@ body {
     text-align: center;
 }
 
-/* Messages */
+/* صناديق التنبيه والأخطاء */
 .message-box {
     display: none;
     padding: 10px;
@@ -96,7 +96,7 @@ body {
     color: #2ecc71;
 }
 
-/* Form Styles */
+/* تصميم النموذج */
 .input-group {
     margin-bottom: 15px;
     display: flex;
@@ -129,7 +129,7 @@ body {
     margin-top: 4px;
 }
 
-/* Buttons */
+/* الأزرار */
 .btn {
     width: 100%;
     padding: 12px;
@@ -179,7 +179,7 @@ body {
     text-decoration: underline;
 }
 
-/* Dashboard Mockup */
+/* لوحة التحكم الشخصية */
 .dashboard-card {
     text-align: center;
 }
