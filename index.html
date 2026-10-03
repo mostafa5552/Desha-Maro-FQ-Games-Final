@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DESHA & MARO GAMES - Auth System</title>
-    <!-- استدعاء أحدث إصدار من مكتبة Supabase JS v2 -->
+    <!-- مكتبة Supabase JS v2 -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- أيقونات FontAwesome -->
+    <!-- مكتبة الأيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- ملف الاستايل -->
+    <!-- ملف الستايل -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -24,11 +24,11 @@
             <div class="card auth-card">
                 <h2 class="card-title" id="auth-title"><i class="fa-solid fa-user-plus"></i> إنشاء حساب جديد</h2>
 
-                <!-- صندوق إظهار الأخطاء والرسائل -->
+                <!-- صندوق إظهار الرسائل والأخطاء -->
                 <div id="auth-message" class="message-box"></div>
 
-                <!-- نموذج الإدخال -->
-                <form id="auth-form" onsubmit="handleAuthSubmit(event)">
+                <!-- نموذج الإدخال (تم إلغاء onsubmit الافتراضي) -->
+                <form id="auth-form" onsubmit="return false;">
                     <!-- 1. اسم المستخدم -->
                     <div class="input-group" id="username-group">
                         <label for="auth-username"><i class="fa-solid fa-user"></i> اسم المستخدم (Username):</label>
@@ -48,8 +48,8 @@
                         <input type="password" id="auth-password" required placeholder="••••••••">
                     </div>
 
-                    <!-- زر الإرسال -->
-                    <button type="submit" id="auth-submit-btn" class="btn btn-red">
+                    <!-- زر الإرسال تم تحويله إلى type="button" لمنع إعادة تحميل الصفحة -->
+                    <button type="button" id="auth-submit-btn" class="btn btn-red" onclick="handleAuthSubmit()">
                         <i class="fa-solid fa-check-circle"></i> إنشاء الحساب وتأكيد
                     </button>
                 </form>
@@ -80,7 +80,7 @@
         </section>
     </div>
 
-    <!-- ملف المحرك جافاسكريبت -->
+    <!-- ملف الجافاسكريبت -->
     <script src="gameEngine.js"></script>
 </body>
 </html>

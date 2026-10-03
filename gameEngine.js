@@ -4,34 +4,52 @@ const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_QVq3yBYg06qBoo7NtENPmQ_JickOTKK
 
 let supabase = null;
 
-try {
-    if (window.supabase) {
-        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+function initSupabase() {
+    try {
+        if (window.supabase) {
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+            console.log("تم الاتصال بـ Supabase بنجاح");
+        } else {
+            console.error("مكتبة Supabase غير محملة");
+        }
+    } catch (e) {
+        console.error("خطأ في التهيئة:", e);
     }
-} catch (e) {
-    console.error("خطأ في التهيئة:", e);
 }
 
 let isLoginMode = false;
 
 // ================= 2. معالجة التسجيل والدخول =================
-async function handleAuthSubmit(e) {
-    e.preventDefault();
+async function handleAuthSubmit() {
     hideMessage();
 
     if (!supabase) {
-        showMessage("خطأ: لم يتم الاتصال بمكتبة Supabase", "error");
+        initSupabase();
+        if (!supabase) {
+            showMessage("خطأ: لم يتم الاتصال بـ Supabase. تحقق من اتصال الإنترنت.", "error");
+            return;
+        }
+    }
+
+    const emailInput = document.getElementById('auth-email');
+    const passwordInput = document.getElementById('auth-password');
+    const usernameInput = document.getElementById('auth-username');
+
+    const email = emailInput ? emailInput.value.trim() : '';
+    const password = passwordInput ? passwordInput.value : '';
+    const username = usernameInput ? usernameInput.value.trim().toLowerCase() : '';
+
+    // التحقق من الإدخالات الأساسية
+    if (!email || !password) {
+        showMessage("يرجى ملء جميع الحقول المطلوبة", "error");
         return;
     }
 
-    const email = document.getElementById('auth-email').value.trim();
-    const password = document.getElementById('auth-password').value;
-    const usernameInput = document.getElementById('auth-username');
-    const username = usernameInput ? usernameInput.value.trim().toLowerCase() : '';
-
     const submitBtn = document.getElementById('auth-submit-btn');
-    submitBtn.disabled = true;
-    submitBtn.innerText = "جاري الاتصال بالخادم...";
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "جاري الاتصال...";
+    }
 
     try {
         if (!isLoginMode) {
@@ -42,7 +60,6 @@ async function handleAuthSubmit(e) {
                 return;
             }
 
-            // إنشاء الحساب وإرسال اسم المستخدم في metadata (الـ Trigger في SQL سيتكفل بالباقي)
             const { data, error } = await supabase.auth.signUp({
                 email: email,
                 password: password,
@@ -52,8 +69,18 @@ async function handleAuthSubmit(e) {
             });
 
             if (error) {
-                showMessage("خطأ في التسجيل: " + error.message, "error");
+                console.error("خطأ في التسجيل:", error);
+                showMessage("خطأ: " + error.message, "error");
             } else if (data.user) {
+                // محاولة إضافة البيانات إلى جدول profiles
+                try {
+                    await supabase.from('profiles').upsert([
+                        { id: data.user.id, username: username, email: email }
+                    ]);
+                } catch (profErr) {
+                    console.log("تنبيه جدول البروفايل:", profErr);
+                }
+
                 showMessage("تم إنشاء الحساب بنجاح!", "success");
                 setTimeout(() => checkUserSession(), 1000);
             }
@@ -65,14 +92,16 @@ async function handleAuthSubmit(e) {
             });
 
             if (error) {
-                showMessage("بيانات الدخول غير صحيحة أو البريد غير مسجل", "error");
+                console.error("خطأ في الدخول:", error);
+                showMessage("خطأ: " + error.message, "error");
             } else if (data.session) {
                 showMessage("تم تسجيل الدخول بنجاح!", "success");
                 setTimeout(() => checkUserSession(), 800);
             }
         }
     } catch (err) {
-        showMessage("حدث خطأ غير متوقع: " + (err.message || err), "error");
+        console.error("خطأ عام:", err);
+        showMessage("حدث خطأ في الاتصال: " + (err.message || err), "error");
     } finally {
         resetSubmitButton();
     }
@@ -112,6 +141,7 @@ function toggleMode(mode) {
 }
 
 async function checkUserSession() {
+    if (!supabase) initSupabase();
     if (!supabase) return;
 
     try {
@@ -160,4 +190,7 @@ function hideMessage() {
     }
 }
 
-window.onload = checkUserSession;
+window.onload = () => {
+    initSupabase();
+    checkUserSession();
+};
