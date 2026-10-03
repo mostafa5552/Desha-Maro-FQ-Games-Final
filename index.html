@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html ="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#cc0000">
+    <title>DESHA & MARO GAMES</title>
+    <link rel="icon" type="image/png" href="https://i.supaimg.com/9b836138-e901-4e3b-a57b-85af24b46cef/c19e453c-1c31-41e9-90d7-6e56189f017b.png">
+    <link rel="apple-touch-icon" href="https://i.supaimg.com/9b836138-e901-4e3b-a57b-85af24b46cef/c19e453c-1c31-41e9-90d7-6e56189f017b.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash-screen" class="screen active">
+    <div class="splash-container">
+        <img src="https://i.supaimg.com/9b836138-e901-4e3b-a57b-85af24b46cef/c19e453c-1c31-41e9-90d7-6e56189f017b.png" alt="Logo" class="splash-logo">
+        <div class="splash-loading"><div class="loading-bar"></div></div>
+        <p class="splash-text">جاري التحميل...</p>
+        <p class="splash-credit">صنع المطور مصطفي</p>
+    </div>
+</div>
+
+<!-- LOGIN -->
+<div id="login-screen" class="screen">
+    <div class="auth-container">
+        <div class="auth-logo">
+            <img src="https://i.supaimg.com/9b836138-e901-4e3b-a57b-85af24b46cef/c19e453c-1c31-41e9-90d7-6e56189f017b.png" alt="Logo">
+        </div>
+        <h2 class="auth-title">تسجيل الدخول</h2>
+        <p class="auth-subtitle">أهلاً بيك في DESHA & MARO GAMES</p>
+        <form id="login-form" class="auth-form">
+            <div class="input-group">
+                <label>👤 اسم المستخدم</label>
+                <input type="text" id="login-username" placeholder="اكتب اسم المستخدم" required autocomplete="username">
+            </div>
+            <div class="input-group">
+                <label>🔒 كلمة المرور</label>
+                <input type="password" id="login-password" placeholder="اكتب كلمة المرور" required autocomplete="current-password">
+            </div>
+            <div id="login-error" class="error-message"></div>
+            <button type="submit" class="btn-primary">دخول</button>
+        </form>
+        <div class="auth-switch">
+            <p>معندكش حساب؟ <a href="#" onclick="showScreen('register-screen')">إنشاء حساب جديد</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- REGISTER -->
+<div id="register-screen" class="screen">
+    <div class="auth-container">
+        <div class="auth-logo">
+            <img src="https://i.supaimg.com/9b836138-e901-4e3b-a57b-85af24b46cef/c19e453c-1c31-41e9-90d7-6e56189f017b.png" alt="Logo">
+        </div>
+        <h2 class="auth-title">إنشاء حساب جديد</h2>
+        <p class="auth-subtitle">انضم لينا وابدأ اللعب</p>
+        <form id="register-form" class="auth-form">
+            <div class="input-group">
+                <label>👤 اسم المستخدم</label>
+                <input type="text" id="reg-username" placeholder="3-20 حرف، إنجليزي وأرقام" required minlength="3" maxlength="20">
+                <small class="hint">مثال: Mohamed77, Ali_Pro</small>
+            </div>
+            <div class="input-group">
+                <label>🔒 كلمة المرور</label>
+                <input type="password" id="reg-password" placeholder="6 أحرف على الأقل" required minlength="6">
+            </div>
+            <div class="input-group">
+                <label>🔒 تأكيد كلمة المرور</label>
+                <input type="password" id="reg-password-confirm" placeholder="أعد كتابة كلمة المرور" required minlength="6">
+            </div>
+            <div id="register-error" class="error-message"></div>
+            <div id="register-success" class="success-message"></div>
+            <button type="submit" class="btn-primary">إنشاء الحساب</button>
+        </form>
+        <div class="auth-switch">
+            <p>عندك حساب؟ <a href="#" onclick="showScreen('login-screen')">تسجيل الدخول</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN MENU -->
+<div id="main-menu-screen" class="screen">
+    <div class="menu-header">
+        <img src="https://i.supaimg.com/9b836138-e901-4e3b-a57b-85af24b46cef/c19e453c-1c31-41e9-90d7-6e56189f017b.png" alt="Logo" class="menu-logo">
+        <div class="user-info">
+            <span class="user-welcome">أهلاً، <span id="current-username">لاعب</span></span>
+            <button class="btn-logout" onclick="logout()">خروج</button>
+        </div>
+    </div>
+    <div class="menu-stats">
+        <div class="stat-box">
+            <span class="stat-icon">🏆</span>
+            <span class="stat-value" id="menu-division">هاوي</span>
+            <span class="stat-label">الديفجن</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-icon">⚽</span>
+            <span class="stat-value" id="menu-matches">0</span>
+            <span class="stat-label">مباريات</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-icon">✅</span>
+            <span class="stat-value" id="menu-wins">0</span>
+            <span class="stat-label">انتصارات</span>
+        </div>
+    </div>
+    <div class="menu-grid">
+        <button class="menu-btn" onclick="openOnline()">
+            <span class="menu-icon">🌐</span>
+            <span class="menu-label">لعب أونلاين</span>
+            <span class="menu-desc">مع الأصدقاء</span>
+        </button>
+        <button class="menu-btn" onclick="openOffline()">
+            <span class="menu-icon">📴</span>
+            <span class="menu-label">لعب أوفلاين</span>
+            <span class="menu-desc">ضد الذكاء الاصطناعي</span>
+        </button>
+        <button class="menu-btn" onclick="openDivisions()">
+            <span class="menu-icon">🏆</span>
+            <span class="menu-label">الديفجنات</span>
+            <span class="menu-desc">7 مستويات</span>
+        </button>
+        <button class="menu-btn" onclick="openStats()">
+            <span class="menu-icon">📊</span>
+            <span class="menu-label">إحصائياتي</span>
+            <span class="menu-desc">تقدمك في اللعبة</span>
+        </button>
+        <button class="menu-btn" onclick="openFriends()">
+            <span class="menu-icon">👥</span>
+            <span class="menu-label">الأصدقاء</span>
+            <span class="menu-desc">ابحث وأضف</span>
+        </button>
+        <button class="menu-btn" onclick="openSettings()">
+            <span class="menu-icon">⚙️</span>
+            <span class="menu-label">الإعدادات</span>
+            <span class="menu-desc">الصوت والمزيد</span>
+        </button>
+        <button class="menu-btn" onclick="openTutorial()" style="grid-column:1/-1;min-height:70px;flex-direction:row;gap:15px">
+            <span class="menu-icon">📖</span>
+            <span class="menu-label">شرح اللعبة</span>
+            <span class="menu-desc">اتعلم إزاي تلعب</span>
+        </button>
+    </div>
+    <div class="menu-footer">
+        <p>DESHA & MARO GAMES © 2026</p>
+    </div>
+</div>
+
+<!-- OFFLINE -->
+<div id="offline-screen" class="screen">
+    <div class="page-header">
+        <button class="btn-back" onclick="showScreen('main-menu-screen')">← رجوع</button>
+        <h2>لعب أوفلاين</h2>
+    </div>
+    <div class="offline-container">
+        <p class="offline-desc">اختار نوع اللعبة الأول، بعدين اختار الصعوبة</p>
+        <div style="display:flex;gap:10px;margin-bottom:15px">
+            <button id="type-quiz-btn" onclick="selectOfflineType('quiz')" class="btn-primary" style="flex:1;font-size:14px">❓ أسئلة كروية</button>
+            <button id="type-form-btn" onclick="selectOfflineType('formation')" class="btn-primary" style="flex:1;font-size:14px;background:linear-gradient(135deg,#333,#111);border-color:#555">⚽ كوّن تشكيلتك</button>
+        </div>
+        <button class="difficulty-btn easy" onclick="startWithSelectedType('easy')">
+            <span class="diff-icon">🟢</span>
+            <div>
+                <span class="diff-title">سهل</span>
+                <span class="diff-desc">ردود بطيئة - للتعلم</span>
+            </div>
+        </button>
+        <button class="difficulty-btn medium" onclick="startWithSelectedType('medium')">
+            <span class="diff-icon">🟡</span>
+            <div>
+                <span class="diff-title">متوسط</span>
+                <span class="diff-desc">تحدي متوازن</span>
+            </div>
+        </button>
+        <button class="difficulty-btn hard" onclick="startWithSelectedType('hard')">
+            <span class="diff-icon">🔴</span>
+            <div>
+                <span class="diff-title">صعب</span>
+                <span class="diff-desc">للمحترفين فقط</span>
+            </div>
+        </button>
+    </div>
+</div>
+
+<!-- LOADING -->
+<div id="loading-overlay" class="loading-overlay hidden">
+    <div class="loader"></div>
+    <p id="loading-text">جاري التحميل...</p>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast hidden"></div>
+
+    <script src="app-formation.js"></script>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(function (reg) {
+                    console.log('✅ Service Worker registered');
+                })
+                .catch(function (err) {
+                    console.log('❌ Service Worker failed:', err);
+                });
+        });
+    }
+</script>
+
+</body>
+
+</body>
+</html>
