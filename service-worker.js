@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dm-games-v1';
+const CACHE_NAME = 'dm-games-v3';
 const URLS_TO_CACHE = [
     'index.html',
     'style.css',
